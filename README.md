@@ -110,6 +110,7 @@ This is a hackathon proof of concept. Third-party code, models, clips and avatar
 | [Tesseract.js](https://github.com/naptha/tesseract.js) and its language data | Reading text from photos | Apache-2.0 |
 | [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) | Running models in the browser | MIT |
 | [`nocontextdoruk/asl-landmark-mlp`](https://huggingface.co/nocontextdoruk/asl-landmark-mlp) | English fingerspelling classifier (`public/models/asl`) | CC BY-NC 4.0 (non-commercial) |
+| Isharah (إشارة) | Arabic sign recognition engine, models and sign clips (`src/sli`, `public/models`, `public/clips`) | Per the Isharah repository's licence |
 | DeepL, Google Cloud Translation, MyMemory | Text translation | Their own terms of service |
 
 ## Vision
