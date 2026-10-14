@@ -1,0 +1,221 @@
+export type UiLang = 'ar' | 'en';
+
+const ar = {
+  appName: 'SLI',
+  tagline: 'مترجم لغة الإشارة العربية بالذكاء الاصطناعي',
+  navSign: 'أشِر',
+  navText: 'اكتب أو تكلّم',
+  navTalk: 'محادثة',
+  navDict: 'القاموس',
+  navAbout: 'عن التطبيق',
+  langToggle: 'English',
+  themeToggle: 'تبديل المظهر',
+
+  // sign -> text
+  signTitle: 'أشِر أمام الكاميرا',
+  signHint: 'أشِر أمام الكاميرا بيد واحدة أو بيدين؛ تظهر الترجمة وأنت تشير.',
+  modeLabel: 'نوع الإشارة',
+  teachLink: 'علّم التطبيق يدك لحروف أدق',
+  teachTitle: 'علّم التطبيق يدك',
+  framing: {
+    handOut: 'يدك خارج الصورة: ابتعد قليلًا عن الكاميرا.',
+    tooClose: 'ابتعد قليلًا عن الكاميرا حتى تبقى يداك داخل الصورة.',
+  } as Record<string, string>,
+  framingRotate: 'أو أدِر الهاتف أفقيًا.',
+  modes: { auto: 'تلقائي', words: 'كلمات', letters: 'حروف', sentences: 'جمل' } as Record<string, string>,
+  modeHints: {
+    auto: 'اخلط الكلمات والحروف: أشِر بالكلمة كالمعتاد، وللتهجئة اثبت على كل حرف لحظة بيد ساكنة.',
+    words: 'أشِر بالكلمة؛ تظهر باهتة وأنت تشير ثم تُثبَّت حين يتأكد منها التطبيق.',
+    letters: 'تهجَّ حرفًا حرفًا: اثبت على كل حرف لحظة ثم انتقل للتالي دون إنزال يدك. أنزل يدك لإنهاء الكلمة.',
+    sentences: 'أشِر بجملة كاملة بشكل طبيعي، ثم أنزل يديك لتظهر الترجمة. تعمل الجمل المعروفة في لغة الإشارة السعودية.',
+  } as Record<string, string>,
+  sentenceFrom: { server: 'ترجمة الخادم', phone: 'ترجمة على الجهاز' } as Record<string, string>,
+  startCamera: 'تشغيل الكاميرا',
+  stopCamera: 'إيقاف الكاميرا',
+  loadingModels: 'جارٍ تحميل النماذج…',
+  loadingStep: { pose: 'نموذج الجسم', face: 'نموذج الوجه', hand: 'نموذج اليد' } as Record<string, string>,
+  cameraDenied: 'لم يُسمح باستخدام الكاميرا. اسمح بها من إعدادات المتصفح ثم أعد المحاولة.',
+  cameraMissing: 'لم نجد كاميرا على هذا الجهاز.',
+  cameraError: 'تعذر تشغيل الكاميرا',
+  cameraInsecure: 'الكاميرا على الجوال تعمل فقط عبر رابط آمن (https). افتح الموقع المنشور بدل الرابط المحلي.',
+  cameraOff: 'الكاميرا متوقفة',
+  noHand: 'لا توجد يد في الصورة',
+  handSeen: 'نرى يدك',
+  maybe: 'ربما',
+  speakSentence: 'انطق الجملة',
+  undo: 'تراجع',
+  clear: 'مسح',
+  emptySentence: 'لم تُترجم أي إشارة بعد.',
+  tapToFix: 'اضغط على كلمة لاختيار بديل.',
+  alternatives: 'بدائل',
+  remove: 'حذف',
+  autoSpeak: 'انطق كل كلمة فور التعرف عليها',
+  fps: 'إطار/ث',
+
+  // text -> sign
+  textTitle: 'اكتب أو تكلّم، وشاهد الإشارة',
+  textPlaceholder: 'اكتب جملة… مثل: السلام عليكم، أنا طبيب',
+  translate: 'ترجم إلى إشارة',
+  listen: 'تكلّم',
+  listening: 'نستمع…',
+  stopListening: 'إيقاف الاستماع',
+  sttUnsupported: 'التعرف على الكلام غير متاح في هذا المتصفح. جرّب Chrome أو Edge.',
+  sttError: 'تعذر التعرف على الكلام',
+  play: 'تشغيل',
+  pause: 'إيقاف مؤقت',
+  replay: 'إعادة',
+  speed: 'السرعة',
+  spelled: 'تهجئة بالحروف',
+  noSign: 'لا توجد إشارة لهذا الرمز',
+  planEmpty: 'اكتب كلمة أو جملة لترى إشاراتها.',
+  examples: 'جرّب',
+
+  // conversation
+  talkTitle: 'محادثة بين أصم وسامع',
+  talkDeaf: 'الأصم يشير',
+  talkHearing: 'السامع يتكلم',
+  talkSend: 'أرسل',
+  talkEmpty: 'ابدأ المحادثة: أشِر أمام الكاميرا أو اضغط «تكلّم».',
+  showInSign: 'اعرض بالإشارة',
+  typeInstead: 'أو اكتب هنا…',
+
+  // dictionary
+  dictTitle: 'قاموس الإشارات',
+  dictSearch: 'ابحث عن كلمة…',
+  allCats: 'الكل',
+  cats: {
+    social: 'تحيات ومجاملات', family: 'العائلة والناس', verbs: 'أفعال', traits: 'صفات ومشاعر',
+    places: 'اتجاهات وأماكن', home: 'البيت', health: 'الصحة والجسم', jobs: 'المهن',
+    religion: 'الدين', numbers: 'الأرقام', letters: 'الحروف',
+  } as Record<string, string>,
+  signs: 'إشارة',
+  noResults: 'لا توجد إشارة بهذا الاسم. جرّب كلمة أخرى أو تهجئتها بالحروف.',
+  close: 'إغلاق',
+
+  // about
+  aboutTitle: 'عن SLI',
+  offline: 'يعمل التعرف كله على جهازك؛ لا تُرسل صورة الكاميرا إلى أي خادم.',
+};
+
+type Dict = typeof ar;
+
+const en: Dict = {
+  appName: 'SLI',
+  tagline: 'AI Arabic Sign Language interpreter',
+  navSign: 'Sign',
+  navText: 'Type or speak',
+  navTalk: 'Conversation',
+  navDict: 'Dictionary',
+  navAbout: 'About',
+  langToggle: 'العربية',
+  themeToggle: 'Toggle theme',
+
+  signTitle: 'Sign in front of the camera',
+  signHint: 'Sign to the camera with one hand or both; the translation appears as you sign.',
+  modeLabel: 'What are you signing?',
+  teachLink: 'Teach the app your hand for better letters',
+  teachTitle: 'Teach the app your hand',
+  framing: {
+    handOut: 'Your hand is outside the picture: move back a little.',
+    tooClose: 'Move back a little so both hands stay in the picture.',
+  } as Record<string, string>,
+  framingRotate: 'Or turn the phone sideways.',
+  modes: { auto: 'Auto', words: 'Words', letters: 'Letters', sentences: 'Sentences' },
+  modeHints: {
+    auto: 'Mix words and letters: sign words as usual; to spell, hold each letter still for a moment.',
+    words: 'Sign a word: it appears faintly while you sign and is confirmed once the app is sure.',
+    letters: 'Spell letter by letter: hold each letter a moment, then move to the next without lowering your hand. Lower your hand to end the word.',
+    sentences: 'Sign a whole sentence naturally, then lower your hands to see the translation. Works for known Saudi Sign Language sentences.',
+  },
+  sentenceFrom: { server: 'Server translation', phone: 'On-device translation' },
+  startCamera: 'Start camera',
+  stopCamera: 'Stop camera',
+  loadingModels: 'Loading models…',
+  loadingStep: { pose: 'body model', face: 'face model', hand: 'hand model' },
+  cameraDenied: 'Camera access was blocked. Allow it in your browser settings and try again.',
+  cameraMissing: 'No camera found on this device.',
+  cameraError: 'Could not start the camera',
+  cameraInsecure: 'On phones the camera only works over a secure (https) link. Open the deployed site instead of the local address.',
+  cameraOff: 'Camera is off',
+  noHand: 'No hand in view',
+  handSeen: 'Hand in view',
+  maybe: 'Maybe',
+  speakSentence: 'Speak sentence',
+  undo: 'Undo',
+  clear: 'Clear',
+  emptySentence: 'No signs translated yet.',
+  tapToFix: 'Tap a word to pick an alternative.',
+  alternatives: 'Alternatives',
+  remove: 'Remove',
+  autoSpeak: 'Speak each word as soon as it is recognised',
+  fps: 'fps',
+
+  textTitle: 'Type or speak, and watch it signed',
+  textPlaceholder: 'Type a sentence… e.g. السلام عليكم، أنا طبيب',
+  translate: 'Translate to sign',
+  listen: 'Speak',
+  listening: 'Listening…',
+  stopListening: 'Stop listening',
+  sttUnsupported: 'Speech recognition is not available in this browser. Try Chrome or Edge.',
+  sttError: 'Speech recognition failed',
+  play: 'Play',
+  pause: 'Pause',
+  replay: 'Replay',
+  speed: 'Speed',
+  spelled: 'Fingerspelled',
+  noSign: 'No sign for this character',
+  planEmpty: 'Type a word or sentence to see its signs.',
+  examples: 'Try',
+
+  talkTitle: 'Deaf and hearing conversation',
+  talkDeaf: 'Deaf person signs',
+  talkHearing: 'Hearing person speaks',
+  talkSend: 'Send',
+  talkEmpty: 'Start talking: sign in front of the camera or press Speak.',
+  showInSign: 'Show in sign',
+  typeInstead: 'or type here…',
+
+  dictTitle: 'Sign dictionary',
+  dictSearch: 'Search for a word…',
+  allCats: 'All',
+  cats: {
+    social: 'Greetings', family: 'Family & people', verbs: 'Verbs', traits: 'Traits & feelings',
+    places: 'Directions & places', home: 'Home', health: 'Health & body', jobs: 'Jobs',
+    religion: 'Religion', numbers: 'Numbers', letters: 'Letters',
+  },
+  signs: 'signs',
+  noResults: 'No sign with that name. Try another word, or fingerspell it.',
+  close: 'Close',
+
+  aboutTitle: 'About SLI',
+  offline: 'All recognition runs on your device; camera images are never sent to a server.',
+};
+
+const dicts = { ar, en };
+
+let current: UiLang = (() => {
+  try {
+    return (localStorage.getItem('sli-lang') as UiLang) || 'ar';
+  } catch {
+    return 'ar';
+  }
+})();
+
+export const lang = () => current;
+export const t = () => dicts[current];
+
+export function setLang(l: UiLang) {
+  current = l;
+  try {
+    localStorage.setItem('sli-lang', l);
+  } catch {
+    /* private mode */
+  }
+  document.documentElement.lang = l;
+  document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+}
+
+/** Sets the UI language of the embedded SLI widgets without touching the page direction. */
+export function setUiLang(l: UiLang) {
+  current = l;
+}
