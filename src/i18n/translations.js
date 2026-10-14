@@ -35,6 +35,7 @@ const messages = {
     micUnsupported: "Voice typing isn't available in this browser. Tap the microphone key on your keyboard to dictate, or open the site in Safari or Chrome.",
     home: {
       openApp: 'Try Connector', how: 'See how it works',
+      vision: 'A world where communication is limited neither by language nor by hearing ability.',
       heroTitle: 'Communication that understands you, whatever language you use',
       heroText: 'Connector is a translation platform for everyone. It turns speech, text, photos and sign language into something the other person understands, so every conversation is easier and more inclusive.',
       audienceTitle: 'Made for everyone',
@@ -103,6 +104,7 @@ const messages = {
     micUnsupported: 'الكتابة الصوتية غير متاحة في هذا المتصفح. استخدم زر الميكروفون في لوحة المفاتيح للإملاء، أو افتح الموقع من Safari أو Chrome.',
     home: {
       openApp: 'جرّب Connector', how: 'اكتشف كيف يعمل',
+      vision: 'عالم يتواصل فيه الجميع، مهما اختلفت لغاتهم أو قدراتهم السمعية.',
       heroTitle: 'تواصل يفهمك، مهما اختلفت لغتك',
       heroText: 'Connector منصة ترجمة للجميع: تحوّل الكلام والنص والصور ولغة الإشارة إلى ما يفهمه الطرف الآخر، لتكون كل محادثة أسهل وأكثر شمولًا.',
       audienceTitle: 'صُمّم للجميع',

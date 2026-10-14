@@ -16,6 +16,7 @@ export default function HomePage({ messages, language, onLanguageChange }) {
       </header>
 
       <section className="home-hero">
+        <p className="home-vision">{h.vision}</p>
         <h1>{h.heroTitle}</h1>
         <p>{h.heroText}</p>
         <div className="home-cta">

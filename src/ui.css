@@ -312,3 +312,4 @@ a.btn, .brand { text-decoration: none; }
 .m-logo .logo-txt b, .home-logo .logo-txt b { font-size: 26px; }
 .m-logo .logo-txt small, .home-logo .logo-txt small { margin-top: 4px; font-size: 6.5px; letter-spacing: .18em; }
 @media (max-width: 900px) { .home-logo .logo-mark { height: 42px; } .home-logo .logo-txt b { font-size: 24px; } }
+.home-hero .home-vision { margin: 0 auto 18px; max-width: 52ch; text-wrap: balance; font-size: clamp(15px, 2vw, 19px); font-weight: 600; line-height: 1.6; color: #d9f27e; }
