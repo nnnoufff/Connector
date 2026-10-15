@@ -1,12 +1,10 @@
-// Connector logo: two-people infinity mark (image) + live text, so the name stays sharp and translatable.
-export default function Logo({ tone = 'light', tagline = true, className = '' }) {
+// Connector logo (image): dark-ink wordmark in light mode, white wordmark in dark mode, all-white on the purple splash.
+export default function Logo({ variant = 'auto', className = '', label = 'Connector' }) {
+  if (variant === 'white') return <span className={`logo ${className}`}><img className="logo-img" src="/logo-white.png" alt={label} /></span>
   return (
-    <span className={`logo ${tone} ${className}`}>
-      <img className="logo-mark" src={tone === 'light' ? '/logo-mark-light.png' : '/logo-mark.png'} alt="" />
-      <span className="logo-txt" dir="ltr">
-        <b>Connector</b>
-        {tagline && <small>COMMUNICATION WITHOUT BARRIERS</small>}
-      </span>
+    <span className={`logo ${className}`}>
+      <img className="logo-img logo-l" src="/logo-light.png" alt={label} />
+      <img className="logo-img logo-d" src="/logo-dark.png" alt="" aria-hidden="true" />
     </span>
   )
 }

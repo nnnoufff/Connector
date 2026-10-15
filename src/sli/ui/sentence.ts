@@ -13,6 +13,12 @@ interface Token {
   endsWord?: boolean; // a spelled word ends here (the hands were lowered)
 }
 
+/** Arabic text of a sign as shown to the user. The fingerspelled hamza is typed as baa (ب). */
+export const arOf = (id: number): string => {
+  const s = signById(id);
+  return s.cat === 'letters' && s.ar === 'ء' ? 'ب' : s.ar;
+};
+
 const isLetter = (id: number) => signById(id).cat === 'letters';
 const joinsPrevious = (id: number, prev: Token | undefined) => isLetter(id) && !!prev && isLetter(prev.id) && !prev.endsWord;
 
@@ -23,7 +29,7 @@ export function sentenceText(tokens: { id: number; endsWord?: boolean }[]): stri
   for (const tk of tokens) {
     const s = signById(tk.id);
     const letter = s.cat === 'letters';
-    const text = letter ? s.ar.replace('ـ', '') : s.ar;
+    const text = letter ? arOf(tk.id).replace('ـ', '') : s.ar;
     out += (out && !(letter && joinNext) ? ' ' : '') + text;
     joinNext = letter && !tk.endsWord;
   }
@@ -55,7 +61,7 @@ export class Sentence {
     }
     const joined = joinsPrevious(id, this.tokens[this.tokens.length - 1]);
     this.pending.className = `word pending${isLetter(id) ? ' letter' : ''}${joined ? ' joined' : ''}`;
-    this.pending.textContent = signById(id).ar;
+    this.pending.textContent = arOf(id);
     if (!this.pending.isConnected) {
       this.list.querySelector('.empty')?.remove();
       this.list.append(this.pending);
@@ -107,7 +113,7 @@ export class Sentence {
               this.render();
             },
           },
-          signById(g.id).ar,
+          arOf(g.id),
           h('small', {}, `${Math.round(g.p * 100)}%`),
         ),
       ),
@@ -150,9 +156,9 @@ export class Sentence {
             {
               class: `word${letter ? ' letter' : ''}${joined ? ' joined' : ''}`,
               'aria-haspopup': 'menu',
-              'data-alts': tk.alternatives.map((a) => signById(a.id).ar).join('|'),
+              'data-alts': tk.alternatives.map((a) => arOf(a.id)).join('|'),
             },
-            signById(tk.id).ar,
+            arOf(tk.id),
           );
           b.addEventListener('click', () => this.openMenu(i, b));
           return b;

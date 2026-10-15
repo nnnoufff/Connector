@@ -5,6 +5,10 @@
 
 import type { Commit, DecoderEvents } from './decoder';
 import type { Guess } from './topk';
+import { signById } from '../data/signs';
+
+// Letters that are never typed: when the model's best guess is one of these, the next best guess is used instead.
+const SKIPPED_LETTERS = new Set(['ع']);
 
 export interface SpellerOptions {
   holdMs: number;
@@ -65,13 +69,21 @@ export class Speller {
     else for (let i = 0; i < probs.length; i++) this.avg[i] = a * probs[i] + (1 - a) * this.avg[i];
     const avg = this.avg;
 
-    const order = Array.from(avg.keys()).sort((x, y) => avg[y] - avg[x]);
+    // Skipped letters (ع) are masked out: the next best guess takes over, with the remaining probability renormalised.
+    const masked = (i: number) => SKIPPED_LETTERS.has(signById(this.classes[i]).ar);
+    let left = 1;
+    for (const i of avg.keys()) if (masked(i)) left -= avg[i];
+    const norm = left > 0.05 ? 1 / left : 1;
+    const order = Array.from(avg.keys())
+      .filter((i) => !masked(i))
+      .sort((x, y) => avg[y] - avg[x]);
     const top = order[0];
-    const guesses: Guess[] = order.slice(0, 5).map((i) => ({ id: this.classes[i], p: avg[i] }));
+    const pOf = (i: number) => Math.min(1, avg[i] * norm);
+    const guesses: Guess[] = order.slice(0, 5).map((i) => ({ id: this.classes[i], p: pOf(i) }));
     this.events.onLive?.(guesses, t);
 
-    if (this.last >= 0 && avg[this.last] < this.opts.releaseP) this.released = true;
-    if (avg[top] < this.opts.minP || !still) {
+    if (this.last >= 0 && pOf(this.last) < this.opts.releaseP) this.released = true;
+    if (pOf(top) < this.opts.minP || !still) {
       this.candidate = -1;
       return;
     }

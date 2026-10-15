@@ -1,16 +1,15 @@
 import Icon from './Icons.jsx'
 
-/** The one place where the person chooses which sign language is used: Arabic or English (ASL). */
+/** Which sign language is used: Arabic or English (ASL). A two-option segmented control. */
 export default function SignLangSwitch({ value, onChange, messages }) {
   return (
-    <label className="pick">
+    <div className="seg-wrap">
       <span className="pick-label"><Icon name="hand" size={17} />{messages.signLanguage}</span>
-      <span className="select-wrap">
-        <select value={value} onChange={(e) => onChange(e.target.value)} aria-label={messages.signLanguage}>
-          <option value="ar">{messages.arabicSign}</option>
-          <option value="en">{messages.englishSign}</option>
-        </select>
-      </span>
-    </label>
+      <div className="seg" role="group" aria-label={messages.signLanguage}>
+        {[['ar', messages.arabicSign], ['en', messages.englishSign]].map(([code, name]) => (
+          <button key={code} type="button" className={value === code ? 'on' : ''} aria-pressed={value === code} onClick={() => onChange(code)}>{name}</button>
+        ))}
+      </div>
+    </div>
   )
 }

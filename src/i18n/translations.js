@@ -1,3 +1,5 @@
+import { extras } from './ui.js'
+
 const messages = {
   en: {
     brand: 'Connector', tagline: 'Communication, without barriers', workspace: 'Workspace',
@@ -26,13 +28,21 @@ const messages = {
     arSignTag: 'Arabic sign language', enSignTag: 'English sign language (ASL)', enLettersTag: 'ASL fingerspelling (A–Z)',
     translationDown: 'Translation is unavailable right now.',
 
-    tabType: 'Type', tabSpeak: 'Speak', typeHere: 'Type or paste text here…', speakHere: 'Tap the microphone and speak',
+    tabType: 'Type', tabSpeak: 'Speak', tabPhoto: 'Photo', typeHere: 'Type or paste text here…', speakHere: 'Tap the microphone and speak',
     listening: 'Listening…', tapToSpeak: 'Tap to speak', writtenIn: 'Written in', autoDetect: 'Auto-detect',
     generate: 'Generate sign', working: 'Working…', examples: 'Examples', clear: 'Clear',
     signDisplay: 'Sign display', translatedTo: 'Translated text', replay: 'Replay',
     toArabicTag: 'Into Arabic', toEnglishTag: 'Into English', alreadyTarget: 'Already in this language',
     avatarExperimental: 'Experimental avatar: signed English, not full ASL.', signed: 'signed', fingerspelled: 'fingerspelled',
     micUnsupported: "Voice typing isn't available in this browser. Tap the microphone key on your keyboard to dictate, or open the site in Safari or Chrome.",
+    signToSign: 'Sign to sign', signToSignSub: 'Arabic and English signers talk to each other',
+    s2s: {
+      title: 'Sign to sign', description: 'A signer of Arabic sign language and a signer of English sign language (ASL) can talk to each other. Each signs to the camera and the other side sees the message signed in their own language.',
+      whoSigns: 'Who is signing now?', signing: 'Signing', otherSees: 'The other person sees', send: 'Send', sending: 'Translating…',
+      switchTurn: 'Switch turn', yourMessage: 'Recognized from the camera', emptyMessage: 'Sign to the camera. What it recognizes appears here.',
+      waiting: 'The signed message will appear here after you send.', textLine: 'Message in the other language',
+      from: 'From', replay: 'Replay', space: 'Space', lettersNote: 'English signing is read as fingerspelled letters (A–Z).', avatarNote: 'English is shown by the avatar; words it does not know are fingerspelled.',
+    },
     home: {
       openApp: 'Try Connector', how: 'See how it works',
       vision: 'A world where communication is limited neither by language nor by hearing ability.',
@@ -45,6 +55,7 @@ const messages = {
         { icon: 'hand', title: 'Sign to text and voice', headline: 'Sign with your hands, let Connector carry your message.', text: 'Show your signs to the camera and watch the text appear. Translate it into 27 languages or have it read aloud.', to: '/sign-to-text', cta: 'Try sign recognition' },
         { icon: 'text', title: 'Text to sign', headline: 'Write your message, watch it in sign language.', text: 'Type or say anything in any language. Connector translates it into Arabic or English and shows the signs.', to: '/text-to-sign', cta: 'Turn text into signs' },
         { icon: 'translate', title: 'Translate', headline: 'Understand others, express yourself in their language.', text: 'Translate text, speech, or a photo of a sign or menu between 27 languages, and listen to the result.', to: '/translate', cta: 'Start translating' },
+        { icon: 'swap', title: 'Sign to sign', headline: 'Two sign languages, one conversation.', text: 'An Arabic signer and an English signer talk to each other. Each signs to the camera and sees the reply in their own sign language.', to: '/sign-to-sign', cta: 'Start a conversation' },
       ],
       stepsTitle: 'Three steps to easier communication',
       steps: [
@@ -55,9 +66,19 @@ const messages = {
       privacyTitle: 'Private by design',
       privacyText: 'Sign recognition and photo reading run on your device. Camera images and photos are never uploaded; only text is sent to be translated.',
       statusTitle: 'Ready to try today',
-      works: ['Arabic signs to text: supported words, letters and sentences', 'English fingerspelling to text (letters A–Z)', 'Text to Arabic sign language with real signer videos', 'Text to English signs with an avatar (experimental)', 'Text, voice and photo translation between 27 languages', 'Listening to translations, where your device has the voice'],
+      works: ['Arabic signs to text: supported words, letters and sentences', 'Conversation between an Arabic signer and an English (ASL) signer, in both directions', 'English fingerspelling to text (letters A–Z)', 'Text to Arabic sign language with real signer videos', 'Text to English signs with an avatar (experimental)', 'Text, voice and photo translation between 27 languages', 'Listening to translations, where your device has the voice'],
       experimentalTitle: 'In development',
       experimental: ['Wider Arabic sign vocabulary and better sentence accuracy', 'English sign recognition beyond letters', 'More complete avatar movements. Today it is English word order with a small ASL vocabulary, not full ASL', 'Connector recognizes supported signs; it is not yet a full sign language interpreter'],
+      nav: [{ id: 'top', label: 'Home' }, { id: 'features', label: 'Features' }, { id: 'how', label: 'How it works' }, { id: 'status', label: 'What works today' }, { id: 'faq', label: 'FAQ' }],
+      servicesLabel: 'Translation tools',
+      faqTitle: 'Frequently asked questions',
+      faq: [
+        { q: 'Is Connector free?', a: 'Connector is a free proof of concept built to demonstrate the idea. Results may not always be accurate.' },
+        { q: 'Which languages and sign languages are supported?', a: 'Text, voice and photo translation covers 27 languages. For signs, Arabic (words, letters and sentences) and English (fingerspelled letters A–Z) are supported.' },
+        { q: 'Are my camera images or photos uploaded?', a: 'No. Sign recognition and photo reading run in your browser. Only text is sent to the translation service (DeepL, Google Translate or MyMemory).' },
+        { q: 'Why does the camera or microphone not work on my phone?', a: 'They need a secure (https) address and your permission. Open the site from its https link and allow access when asked. Voice typing and reading aloud also depend on your device and browser.' },
+        { q: 'Is Connector a full sign language interpreter?', a: 'Not yet. It recognizes the signs it supports, and the English avatar is experimental: English word order with a small ASL vocabulary, not full ASL.' },
+      ],
       missionTitle: 'Technology in service of people',
       missionText: 'Differences in language or in how people communicate should never stop them from understanding each other. We are building Connector to make communication easier and open to everyone.',
       footer: 'Connector, communication without barriers. A proof of concept: results may not always be accurate.',
@@ -95,13 +116,21 @@ const messages = {
     arSignTag: 'لغة الإشارة العربية', enSignTag: 'لغة الإشارة الإنجليزية (ASL)', enLettersTag: 'هجاء الأحرف ASL (A–Z)',
     translationDown: 'الترجمة غير متاحة حاليًا.',
 
-    tabType: 'اكتب النص', tabSpeak: 'تحدّث', typeHere: 'اكتب أو الصق النص هنا…', speakHere: 'اضغط على الميكروفون وابدأ الكلام',
+    tabType: 'اكتب النص', tabSpeak: 'تحدّث', tabPhoto: 'صورة', typeHere: 'اكتب أو الصق النص هنا…', speakHere: 'اضغط على الميكروفون وابدأ الكلام',
     listening: 'جارٍ الاستماع…', tapToSpeak: 'اضغط للتحدث', writtenIn: 'لغة الكتابة', autoDetect: 'كشف تلقائي',
     generate: 'إنشاء الإشارة', working: 'جارٍ التنفيذ…', examples: 'أمثلة', clear: 'مسح',
     signDisplay: 'عرض الإشارة', translatedTo: 'النص المترجم', replay: 'إعادة',
     toArabicTag: 'إلى العربية', toEnglishTag: 'إلى الإنجليزية', alreadyTarget: 'النص بهذه اللغة أصلًا',
     avatarExperimental: 'شخصية تجريبية: إنجليزي بالإشارات وليس ASL كاملة.', signed: 'بإشارة', fingerspelled: 'بالهجاء',
     micUnsupported: 'الكتابة الصوتية غير متاحة في هذا المتصفح. استخدم زر الميكروفون في لوحة المفاتيح للإملاء، أو افتح الموقع من Safari أو Chrome.',
+    signToSign: 'من إشارة إلى إشارة', signToSignSub: 'محادثة بين موقّع عربي وموقّع إنجليزي',
+    s2s: {
+      title: 'من إشارة إلى إشارة', description: 'يتحدث موقّع بلغة الإشارة العربية مع موقّع بلغة الإشارة الإنجليزية (ASL). كل طرف يشير للكاميرا، ويرى الطرف الآخر الرسالة بلغة إشارته.',
+      whoSigns: 'من يشير الآن؟', signing: 'يشير', otherSees: 'ما يراه الطرف الآخر', send: 'إرسال', sending: 'جارٍ الترجمة…',
+      switchTurn: 'تبديل الدور', yourMessage: 'ما تعرّفت عليه الكاميرا', emptyMessage: 'أشر للكاميرا، وما يُتعرّف عليه يظهر هنا.',
+      waiting: 'ستظهر الرسالة بالإشارة هنا بعد الإرسال.', textLine: 'الرسالة باللغة الأخرى',
+      from: 'من', replay: 'إعادة', space: 'مسافة', lettersNote: 'تُقرأ الإشارة الإنجليزية كحروف مهجّاة (A–Z).', avatarNote: 'تُعرض الإنجليزية بالأفاتار، وما لا يعرفه من كلمات يُهجّى.',
+    },
     home: {
       openApp: 'جرّب Connector', how: 'اكتشف كيف يعمل',
       vision: 'عالم يتواصل فيه الجميع، مهما اختلفت لغاتهم أو قدراتهم السمعية.',
@@ -114,6 +143,7 @@ const messages = {
         { icon: 'hand', title: 'من لغة الإشارة إلى نص وصوت', headline: 'أشِر بيديك، ودع Connector ينقل رسالتك.', text: 'اعرض إشاراتك للكاميرا وشاهد النص يظهر، ثم ترجمه إلى 27 لغة أو استمع إليه بصوت عالٍ.', to: '/sign-to-text', cta: 'جرّب التعرف على الإشارة' },
         { icon: 'text', title: 'من النص إلى لغة الإشارة', headline: 'اكتب رسالتك، وشاهدها بلغة الإشارة.', text: 'اكتب أو قل أي شيء بأي لغة، فيترجمه Connector إلى العربية أو الإنجليزية ويعرض الإشارات.', to: '/text-to-sign', cta: 'حوّل النص إلى إشارة' },
         { icon: 'translate', title: 'ترجمة بين اللغات', headline: 'افهم الآخرين، وعبّر عن نفسك بلغتهم.', text: 'ترجم نصًا أو كلامًا أو صورة لافتة أو قائمة طعام بين 27 لغة، واستمع إلى النتيجة.', to: '/translate', cta: 'ابدأ الترجمة' },
+        { icon: 'swap', title: 'من إشارة إلى إشارة', headline: 'لغتا إشارة، محادثة واحدة.', text: 'يتحدث موقّع عربي مع موقّع إنجليزي. كل طرف يشير للكاميرا ويرى الرد بلغة إشارته.', to: '/sign-to-sign', cta: 'ابدأ محادثة' },
       ],
       stepsTitle: 'ثلاث خطوات لتواصل أسهل',
       steps: [
@@ -124,9 +154,19 @@ const messages = {
       privacyTitle: 'خصوصيتك أولًا',
       privacyText: 'التعرف على الإشارة وقراءة الصور يتمان على جهازك. صور الكاميرا والصور لا تُرفع أبدًا، والنص وحده يُرسل للترجمة.',
       statusTitle: 'جاهز للتجربة اليوم',
-      works: ['من الإشارة العربية إلى نص: الكلمات والحروف والجمل المدعومة', 'هجاء الإشارة الإنجليزية إلى نص (الحروف A–Z)', 'من النص إلى لغة الإشارة العربية بفيديوهات مترجمين حقيقيين', 'من النص إلى إشارات إنجليزية بشخصية افتراضية (تجريبي)', 'ترجمة النص والصوت والصور بين 27 لغة', 'الاستماع إلى الترجمة، حيث يتوفر الصوت على جهازك'],
+      works: ['من الإشارة العربية إلى نص: الكلمات والحروف والجمل المدعومة', 'محادثة بين موقّع عربي وموقّع إنجليزي (ASL) في الاتجاهين', 'هجاء الإشارة الإنجليزية إلى نص (الحروف A–Z)', 'من النص إلى لغة الإشارة العربية بفيديوهات مترجمين حقيقيين', 'من النص إلى إشارات إنجليزية بشخصية افتراضية (تجريبي)', 'ترجمة النص والصوت والصور بين 27 لغة', 'الاستماع إلى الترجمة، حيث يتوفر الصوت على جهازك'],
       experimentalTitle: 'قيد التطوير',
       experimental: ['توسيع مفردات الإشارة العربية وتحسين دقة الجمل', 'التعرف على الإشارة الإنجليزية بما يتجاوز الحروف', 'حركات أكمل للشخصية الافتراضية. حاليًا: ترتيب إنجليزي ومفردات ASL قليلة وليست ASL كاملة', 'يتعرف Connector على الإشارات المدعومة، وليس بعد مترجم لغة إشارة كاملًا'],
+      nav: [{ id: 'top', label: 'الرئيسية' }, { id: 'features', label: 'المميزات' }, { id: 'how', label: 'كيف يعمل' }, { id: 'status', label: 'ما يعمل اليوم' }, { id: 'faq', label: 'الأسئلة الشائعة' }],
+      servicesLabel: 'أدوات الترجمة',
+      faqTitle: 'الأسئلة الشائعة',
+      faq: [
+        { q: 'هل Connector مجاني؟', a: 'Connector نموذج تجريبي مجاني صُمم لعرض الفكرة، وقد لا تكون النتائج دقيقة دائمًا.' },
+        { q: 'ما اللغات ولغات الإشارة المدعومة؟', a: 'ترجمة النص والصوت والصور تشمل 27 لغة. وللإشارة: العربية (كلمات وحروف وجمل) والإنجليزية (حروف الهجاء A–Z).' },
+        { q: 'هل تُرفع صور الكاميرا أو الصور التي أضيفها؟', a: 'لا. التعرف على الإشارة وقراءة الصور يتمان داخل المتصفح، ويُرسل النص فقط إلى خدمة الترجمة (DeepL أو Google Translate أو MyMemory).' },
+        { q: 'لماذا لا تعمل الكاميرا أو الميكروفون في جوالي؟', a: 'يحتاجان إلى عنوان آمن (https) وموافقتك. افتح الموقع من رابطه https واسمح بالوصول عند الطلب. والكتابة الصوتية والقراءة بصوت عالٍ تعتمدان أيضًا على جهازك والمتصفح.' },
+        { q: 'هل Connector مترجم كامل للغة الإشارة؟', a: 'ليس بعد. يتعرف على الإشارات التي يدعمها، والأفاتار الإنجليزي تجريبي: ترتيب الكلمات إنجليزي مع مفردات قليلة من ASL، وليس ASL كاملة.' },
+      ],
       missionTitle: 'التقنية لخدمة الإنسان',
       missionText: 'اختلاف اللغة أو طريقة التواصل لا ينبغي أن يمنع الناس من فهم بعضهم. لذلك نبني Connector ليكون التواصل أسهل ومتاحًا للجميع.',
       footer: 'Connector، تواصل بلا حواجز. نموذج تجريبي: قد لا تكون النتائج دقيقة دائمًا.',
@@ -140,5 +180,7 @@ const messages = {
 }
 
 export function getMessages(language) {
-  return messages[language] ?? messages.en
+  const base = messages[language] ?? messages.en
+  const extra = extras[language] ?? extras.en
+  return { ...base, ...extra, helpFaq: [...extra.helpFaq, ...(base.home?.faq || [])] }
 }

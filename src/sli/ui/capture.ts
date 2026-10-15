@@ -11,6 +11,7 @@ import { drawOverlay } from './overlay';
 import { FramingCoach, type FramingIssue } from '../recognition/framing';
 import { h, icon } from './dom';
 import type { Sentence } from './sentence';
+import { arOf } from './sentence';
 
 const MODES: SignMode[] = ['auto', 'words', 'letters', 'sentences'];
 
@@ -160,12 +161,12 @@ export class Capture {
     const shown = top.id !== this.lastCommitted && top.p >= (letter ? 0.45 : 0.3);
     if (!shown && this.live.classList.contains('committed')) return;
     this.sentence.setPending(shown ? top.id : null);
-    this.live.textContent = shown ? signById(top.id).ar : '';
+    this.live.textContent = shown ? arOf(top.id) : '';
     this.live.classList.remove('committed');
   }
 
   private flash(c: Commit) {
-    this.live.textContent = signById(c.id).ar;
+    this.live.textContent = arOf(c.id);
     this.live.classList.remove('committed');
     void this.live.offsetWidth;
     this.live.classList.add('committed');

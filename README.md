@@ -29,7 +29,9 @@ Sign languages supported: **Arabic Sign Language** and **American Sign Language 
 | --- | --- | --- |
 | **Translate** | Text, voice and photo translation between 27 languages, with auto-detect, copy, and read-aloud. A photo of a sign or menu is read on the device (OCR) and then translated. | Working |
 | **Sign to text & voice** | Camera → recognized text → translation into any supported language → read aloud. Arabic: words, letters and sentences. English: ASL fingerspelling (A–Z). | Arabic working; English is letters only |
+| **Sign to sign** | An Arabic signer and an English (ASL) signer talk to each other, in both directions: each signs to the camera and the other side sees the message signed in their own language. | Working; English side is fingerspelled letters |
 | **Text to sign** | Type or speak in any language (auto-detected). It is translated to Arabic or English, then signed. Arabic: sign player. English: 3D avatar. | Arabic working; English avatar is experimental |
+| **Settings** | History and saved phrases (kept on the device), languages, light/dark/system appearance, accessibility (text size, high contrast, captions, vibration), help and about. | Working |
 
 **Limitations (please read):**
 - The English avatar uses an English word order with a small ASL vocabulary (about 30 signs) and fingerspells every other word. It is *not* full ASL grammar and should be reviewed by Deaf signers before real use.
@@ -84,9 +86,10 @@ Without any key, translation falls back to MyMemory. For better quality, set `DE
 
 ```text
 src/
-├── components/   # App shell, camera capture, sign player, 3D avatar
+├── components/   # App shell (top bar + bottom tab bar), language sheet, camera capture, sign player, 3D avatar
 ├── i18n/         # Arabic / English interface text
-├── pages/        # Home, Translate, Sign to text, Text to sign
+├── pages/        # Translate, Sign to text, Text to sign, Sign to sign, Settings (history, saved, help, about), Welcome
+├── state/        # Shared app state: language, appearance, history, saved phrases
 ├── services/     # Translation, voice, clipboard, suggested phrases
 └── sli/          # Arabic sign language engine (recognition + sign planning)
 api/               # Serverless DeepL proxy (Vercel)
@@ -110,7 +113,7 @@ This is a hackathon proof of concept. Third-party code, models, clips and avatar
 | [Tesseract.js](https://github.com/naptha/tesseract.js) and its language data | Reading text from photos | Apache-2.0 |
 | [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) | Running models in the browser | MIT |
 | [`nocontextdoruk/asl-landmark-mlp`](https://huggingface.co/nocontextdoruk/asl-landmark-mlp) | English fingerspelling classifier (`public/models/asl`) | CC BY-NC 4.0 (non-commercial) |
-| Isharah (إشارة) | Arabic sign recognition engine, models and sign clips (`src/sli`, `public/models`, `public/clips`) | Per the Isharah repository's licence |
+| [SLI](https://github.com/Digital-Fingers-Team/sli-ai) by the Digital Fingers Team, with [SLI Sentences](https://huggingface.co/DF-Team/sli-sentences) models | Arabic sign recognition engine (`src/sli`), models (`public/models`) and sign clips (`public/clips`). Models were trained on Isharah-1000 and pre-trained on KArSL | Code MIT; model weights CC BY-NC-SA 4.0 (non-commercial, share-alike, credit required) |
 | DeepL, Google Cloud Translation, MyMemory | Text translation | Their own terms of service |
 
 ## Vision
